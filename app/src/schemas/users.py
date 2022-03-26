@@ -9,4 +9,5 @@ class User(BaseModel):
     email: str
     password: str
     status: StatusEnum
-    location: str
+    adress: str
+    country: str

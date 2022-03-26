@@ -12,7 +12,8 @@ users = Table(
     Column("email", String(70), unique=True),
     Column("password", Text),
     Column("status", Enum(StatusEnum)),
-    Column("location", Text),
+    Column("adress", Text),
+    Column("country", Text),
 )
 
 meta.create_all(engine)
