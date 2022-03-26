@@ -48,7 +48,8 @@ def create_user(user: User):
         "email": user.email, 
         "password": user.password, 
         "admin": user.admin, 
-        "status": user.status
+        "status": user.status,
+        "location": user.location
         }
     result = conn.execute(users.insert().values(new_user))
     return conn.execute(users.select().where(users.c.id == result.lastrowid)).first()
@@ -69,7 +70,8 @@ def update_user(user: User, id: int):
             email=user.email, 
             password=user.password, 
             admin=user.admin, 
-            status=user.status
+            status=user.status,
+            location=user.location
         )
         .where(users.c.id == id)
     )

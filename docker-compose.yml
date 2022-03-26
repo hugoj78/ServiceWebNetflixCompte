@@ -15,6 +15,10 @@ services:
       - '3307'
     volumes:
       - my-db_compte:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
   web:
     build: .
     environment:
@@ -23,6 +27,7 @@ services:
     ports:
       - 8090:8090
     depends_on:
-      - "db_compte"
+      db_compte:
+        condition: service_healthy
 volumes:
   my-db_compte:

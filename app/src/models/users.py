@@ -9,9 +9,10 @@ users = Table(
     Column("id", Integer, primary_key=True),
     Column("admin", Boolean),
     Column("name", String(45)),
-    Column("email", Text, unique=True),
+    Column("email", String(70), unique=True),
     Column("password", Text),
     Column("status", Enum(StatusEnum)),
+    Column("location", Text),
 )
 
 meta.create_all(engine)
