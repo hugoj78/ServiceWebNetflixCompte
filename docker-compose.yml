@@ -23,7 +23,6 @@ services:
     build: .
     environment:
       DB_URI: "mysql+pymysql://user:password@db_compte:3307/db_compte"
-      FASTAPI_SIMPLE_SECURITY_SECRET: "ILFAUTMETTRE20AHUGOJEANETGUILLAUME"
     ports:
       - 8090:8090
     depends_on:

@@ -6,7 +6,6 @@ from typing import List
 from starlette.status import HTTP_204_NO_CONTENT, HTTP_200_OK
 from sqlalchemy import func, select
 from cryptography.fernet import Fernet
-from fastapi_simple_security import api_key_security
 from enum import Enum
 from src.models.StatusEnum import StatusEnum
 
@@ -20,7 +19,6 @@ f = Fernet(key)
 
 @router.get(
     "",
-    #dependencies=[Depends(api_key_security)],
     response_model=List[User],
     description="Get a list of all users",
 )
@@ -29,7 +27,6 @@ def get_users():
 
 @router.get(
     "/{id}",
-    #dependencies=[Depends(api_key_security)],
     response_model=User,
     description="Get a single user by Id",
 )
@@ -39,7 +36,6 @@ def get_users(id: str):
 
 @router.post(
     "",
-    #dependencies=[Depends(api_key_security)],
     response_model=User, 
     description="Create a new User")
 def create_user(user: User):
@@ -58,7 +54,6 @@ def create_user(user: User):
 
 @router.put(
     "/{id}",
-    #dependencies=[Depends(api_key_security)],
     response_model=User, 
     description="Update a user by Id"
 )
@@ -81,7 +76,6 @@ def update_user(user: User, id: int):
 
 @router.delete(
     "/{id}",
-    #dependencies=[Depends(api_key_security)],
     status_code=HTTP_200_OK
 )
 def delete_user(id: int):
@@ -94,13 +88,3 @@ def delete_user(id: int):
     )
 
     return conn.execute(users.select().where(users.c.id == id)).first() 
-
-# Delete classique : cependant on ne veut pas supprimer en base mais changer le statut du user par SUSPENDU
-# @router.delete(
-#     "/{id}",
-#     #dependencies=[Depends(api_key_security)],
-#     status_code=HTTP_204_NO_CONTENT
-# )
-# def delete_user(id: int):
-#     conn.execute(users.delete().where(users.c.id == id))
-#     return conn.execute(users.select().where(users.c.id == id)).first()
