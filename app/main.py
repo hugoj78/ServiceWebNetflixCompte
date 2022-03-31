@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.routes.health import router as health
 from src.routes.users import router as user
+from src.routes.health import router as health
 from config.openapi import tags_metadata
 import os
 
