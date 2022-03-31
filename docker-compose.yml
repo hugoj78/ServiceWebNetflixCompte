@@ -15,6 +15,8 @@ services:
       - '3307'
     volumes:
       - my-db_compte:/var/lib/mysql
+    networks:
+      - mynetwork
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 10s
@@ -26,12 +28,12 @@ services:
     ports:
       - 8090:8090
     networks:
-      - default
+      - mynetwork
     depends_on:
       db_compte:
         condition: service_healthy
 volumes:
   my-db_compte:
-
 networks:
-  default:
+  mynetwork:
+    name: "mynetwork"
